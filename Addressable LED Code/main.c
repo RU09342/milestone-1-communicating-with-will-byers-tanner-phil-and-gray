@@ -2,8 +2,8 @@
 #include <pwm.h>
 #include "uart.h"
 
-static const int initial_red = 255;
-static const int initial_green = 69;
+static const int initial_red = 00;
+static const int initial_green = 00;
 static const int initial_blue = 00;
 
 

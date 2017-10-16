@@ -24,8 +24,8 @@ void UART_Init(){
     DCOCTL = 0;                               // Select lowest DCOx and MODx settings
     BCSCTL1 = CALBC1_1MHZ;                    // Set DCO
     DCOCTL = CALDCO_1MHZ;
-    P1SEL = BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
-    P1SEL2 = BIT1 + BIT2 ;                    // P1.1 = RXD, P1.2=TXD
+    P1SEL |= BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
+    P1SEL2 |= BIT1 + BIT2 ;                    // P1.1 = RXD, P1.2=TXD
     UCA0CTL1 |= UCSSEL_2;                     // SMCLK
     UCA0BR0 = 104;                            // 1MHz 9600
     UCA0BR1 = 0;                              // 1MHz 9600
@@ -39,7 +39,6 @@ void UART_Init(){
 __interrupt void USCI0RX_ISR(void)
 {
     while (!(IFG2&UCA0TXIFG));                // USCI_A0 TX buffer ready?
-    tempBuf = UCA0RXBUF;
 
     switch(bytecount){
         case 0: numBytes = UCA0RXBUF;
